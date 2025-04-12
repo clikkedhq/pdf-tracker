@@ -15,6 +15,8 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/tracker.js', express.static('public/tracker.js'));
 
+console.log("Mongo URI:", process.env.MONGO_URI);
+
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
