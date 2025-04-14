@@ -1,21 +1,21 @@
 const express = require('express');
-const View = require('../models/View');
 const router = express.Router();
+const Document = require('../models/Document');
 
-router.post('/', async (req, res) => {
-  const { uuid, userAgent, ip } = req.body;
-
+// Route: POST /api/track/:uuid
+router.post('/:uuid', async (req, res) => {
   try {
-    await View.create({
-      uuid,
-      userAgent,
-      ip,
-      timestamp: new Date()
-    });
+    const doc = await Document.findOne({ uuid: req.params.uuid });
+    if (!doc) return res.status(404).json({ message: 'Document not found' });
 
-    res.json({ success: true });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to log view' });
+    doc.views += 1;
+    doc.lastViewedAt = new Date();
+    await doc.save();
+
+    res.status(200).json({ message: 'View tracked' });
+  } catch (err) {
+    console.error('Error tracking view:', err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
