@@ -1,13 +1,14 @@
 const express = require('express');
-const View = require('../models/View');
 const router = express.Router();
+const Document = require('../models/Document');
 
-router.get('/views', async (req, res) => {
+// Route to get all documents and their tracking data
+router.get('/documents', async (req, res) => {
   try {
-    const views = await View.find().sort({ timestamp: -1 });
-    res.json(views);
+    const documents = await Document.find().sort({ createdAt: -1 });
+    res.json(documents);
   } catch (err) {
-    res.status(500).json({ error: 'Error fetching views' });
+    res.status(500).json({ message: err.message });
   }
 });
 
