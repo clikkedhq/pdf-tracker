@@ -12,6 +12,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post('/', upload.single('pdf'), async (req, res) => {
+    console.log('📥 Upload route hit');
   const file = req.file;
   const doc = await Document.create({
     filename: file.filename,
