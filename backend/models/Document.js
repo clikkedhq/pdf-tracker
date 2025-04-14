@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const documentSchema = new mongoose.Schema({
   filename: String,
   uuid: String,
@@ -14,3 +15,6 @@ const documentSchema = new mongoose.Schema({
     type: Date
   }
 });
+
+module.exports = mongoose.model('Document', documentSchema);
+
