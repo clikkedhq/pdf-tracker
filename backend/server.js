@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/api/upload', uploadRoutes);
 app.use('/view', viewRoutes);
 app.use('/api/track', trackRoutes);
-app.use('/api/track', analyticsRoutes); // <-- This includes /documents endpoints
+app.use('/api/track', analyticsRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
