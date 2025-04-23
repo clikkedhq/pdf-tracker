@@ -1,7 +1,6 @@
-// server.js
+// backend/server.js
 const express = require('express');
 const mongoose = require('mongoose');
-const multer = require('multer');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -20,7 +19,7 @@ app.use('/tracker.js', express.static('public/tracker.js'));
 console.log('Mongo URI:', process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error(err));
@@ -29,8 +28,8 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/api/upload', uploadRoutes);
 app.use('/view', viewRoutes);
 app.use('/api/track', trackRoutes);
-app.use('/api/analytics', analyticsRoutes);  // <- Updated path
+app.use('/api/analytics', analyticsRoutes); // this registers GET /api/analytics/documents
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
