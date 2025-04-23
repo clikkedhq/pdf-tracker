@@ -1,7 +1,7 @@
 // routes/analytics.js
 const express = require('express');
 const router = express.Router();
-const Document = require('../models/Document'); // ✅ fixed casing
+const Document = require('../models/document'); // ✅ fixed casing
 
 console.log('✅ analytics.js loaded');
 
