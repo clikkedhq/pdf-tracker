@@ -1,14 +1,18 @@
+// routes/analytics.js
 const express = require('express');
 const router = express.Router();
-const Document = require('../models/Document');
+const Document = require('../models/document');
 
-// Route to get all documents and their tracking data
+console.log('✅ analytics.js loaded');
+
+// GET /api/analytics/documents
 router.get('/documents', async (req, res) => {
   try {
-    const documents = await Document.find().sort({ createdAt: -1 });
-    res.json(documents);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const documents = await Document.find({});
+    res.status(200).json(documents);
+  } catch (error) {
+    console.error('❌ Error fetching documents:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
