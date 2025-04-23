@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -21,14 +22,14 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => console.log('MongoDB connected'))
-.catch((err) => console.error(err));
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error(err));
 
 // Routes
 app.use('/api/upload', uploadRoutes);
 app.use('/view', viewRoutes);
 app.use('/api/track', trackRoutes);
-app.use('/api/track', analyticsRoutes);
+app.use('/api/analytics', analyticsRoutes);  // <- Updated path
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
