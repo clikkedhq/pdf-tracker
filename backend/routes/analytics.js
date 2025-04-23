@@ -1,7 +1,7 @@
 // routes/analytics.js
 const express = require('express');
 const router = express.Router();
-const Document = require('../models/document');
+const Document = require('../models/Document');
 
 console.log('✅ analytics.js loaded');
 
