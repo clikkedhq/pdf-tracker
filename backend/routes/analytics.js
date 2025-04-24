@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 const Document = require('../models/Document');
 
-console.log('✅ analytics.js loaded');
+console.log('🛠️ analytics.js is being loaded...');
+throw new Error('📛 analytics.js is being loaded!'); // TEMPORARY: Confirm it's getting imported
 
 // DEBUG ROUTE
 router.get('/test', (req, res) => {
@@ -22,4 +23,3 @@ router.get('/documents', async (req, res) => {
 });
 
 module.exports = router;
-
