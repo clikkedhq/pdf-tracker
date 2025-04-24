@@ -37,7 +37,7 @@ app.use('/api/track', trackRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
