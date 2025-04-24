@@ -1,11 +1,16 @@
 // routes/analytics.js
 const express = require('express');
 const router = express.Router();
-const Document = require('../models/Document'); // 👈 fixed casing
+const Document = require('../models/Document');
 
 console.log('✅ analytics.js loaded');
 
-// GET /api/analytics/documents
+// DEBUG ROUTE
+router.get('/test', (req, res) => {
+  res.send('✅ /api/analytics route is working!');
+});
+
+// MAIN ANALYTICS ROUTE
 router.get('/documents', async (req, res) => {
   try {
     const documents = await Document.find({}).sort({ createdAt: -1 });
