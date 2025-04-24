@@ -32,6 +32,7 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/api/upload', uploadRoutes);
 app.use('/view', viewRoutes);
 app.use('/api/track', trackRoutes);
+console.log('📦 Mounting analytics routes at /api/analytics');
 app.use('/api/analytics', analyticsRoutes); // << IMPORTANT
 
 // Fallback for 404
