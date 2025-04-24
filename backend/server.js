@@ -17,7 +17,7 @@ app.use(express.json());
 
 // STATIC ASSETS
 app.use('/uploads', express.static('uploads'));
-app.use('/tracker.js', express.static('public/tracker.js'));
+app.use('/tracker.js', express.static(path.join(__dirname, 'public')));
 
 // MONGO CONNECTION
 console.log('Mongo URI:', process.env.MONGO_URI);
