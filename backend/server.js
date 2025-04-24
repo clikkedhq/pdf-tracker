@@ -2,9 +2,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
-// ROUTES
+// Route Imports
 const uploadRoutes = require('./routes/upload');
 const viewRoutes = require('./routes/view');
 const trackRoutes = require('./routes/track');
@@ -12,14 +13,13 @@ const analyticsRoutes = require('./routes/analytics');
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/tracker.js', express.static(path.join(__dirname, 'public', 'tracker.js')));
 
-// STATIC ASSETS
-app.use('/uploads', express.static('uploads'));
-app.use('/tracker.js', express.static(path.join(__dirname, 'public')));
-
-// MONGO CONNECTION
+// MongoDB Connection
 console.log('Mongo URI:', process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -28,15 +28,17 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('✅ MongoDB connected'))
 .catch((err) => console.error('❌ MongoDB connection error:', err));
 
-// ROUTES
+// Route Mounts
 app.use('/api/upload', uploadRoutes);
 app.use('/view', viewRoutes);
 app.use('/api/track', trackRoutes);
-app.use('/api/analytics', analyticsRoutes); // <-- THIS is what enables /api/analytics/*
+app.use('/api/analytics', analyticsRoutes); // << IMPORTANT
 
-app.get('*', (req, res) => {
-  res.status(404).send('❌ Route not found in Express app');
+// Fallback for 404
+app.use((req, res) => {
+  res.status(404).send('🔍 Route not found');
 });
 
+// Start Server
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
