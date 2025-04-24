@@ -36,8 +36,19 @@ app.use('/view', viewRoutes);
 app.use('/api/track', trackRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
-// Start server
+// ✅ Root route to confirm API is live
+app.get('/', (req, res) => {
+  res.send('✅ Clikked API is live!');
+});
+
+// ❌ 404 handler for undefined routes
+app.use((req, res) => {
+  res.status(404).send('🔍 Route not found');
+});
+
+// 🚀 Start server on Render-assigned port
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
+
